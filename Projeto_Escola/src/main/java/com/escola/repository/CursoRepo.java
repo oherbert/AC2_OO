@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import com.escola.model.Curso;
 import org.springframework.stereotype.Component;
 
@@ -13,20 +11,7 @@ import org.springframework.stereotype.Component;
 public class CursoRepo {
 
     private List <Curso> cursos = new ArrayList<>();
-    int cod = 0;
-
-    @PostConstruct
-    private void criarCurso(){
-        cursos.add(new Curso(nextCod(),"Comunicação",40,2020,40));
-        cursos.add(new Curso(nextCod(),"Prog OO",80,2020,40));
-        cursos.add(new Curso(nextCod(),"Calculo",80,2020,60));
-    }
-
-    public Curso save(Curso curso) {
-        curso.setCodigo(nextCod());
-        cursos.add(curso);
-        return curso;
-    }
+    private int cod = 0;
 
     public List<Curso> getCursos() {
         return cursos;
@@ -41,6 +26,12 @@ public class CursoRepo {
         return Optional.empty();
     }
 
+    public Curso salvar(Curso curso) {
+        curso.setCodigo(nextCod());
+        cursos.add(curso);
+        return curso;
+    }
+
 	public void delete(Curso curso) {
         cursos.remove(curso);
 	}
@@ -53,11 +44,12 @@ public class CursoRepo {
         }
         return aux;
         
-	}
+    }
+    
+    private Integer nextCod(){
+        cod++;
+        return cod;
+    }
 
 
-private Integer nextCod(){
-    cod++;
-    return cod;
-}
 }
