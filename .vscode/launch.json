@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjetoEscolaApplication<Projeto_Escola>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.escola.ProjetoEscolaApplication",
+            "projectName": "Projeto_Escola",
+            "args": ""
+        }
+    ]
+}
