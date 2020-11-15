@@ -3,6 +3,8 @@ package com.escola.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Escola {
     private Integer codigo;
     private String nome;
@@ -10,6 +12,7 @@ public class Escola {
     private Long numeroDeAlunos;
     private String anoFundacao;
 
+    @JsonIgnore
     private List<Curso> cursos = new ArrayList<>();
 
     public Escola(){
@@ -71,5 +74,9 @@ public class Escola {
     public void addCurso(Curso curso) {
         cursos.add(curso);
     }    
+
+    public void deleteCurso(Curso curso) {
+        cursos.remove(curso);
+    }  
     
 }

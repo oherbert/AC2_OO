@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.escola.dto.EscolaDTO;
+import com.escola.model.Curso;
 import com.escola.model.Escola;
 import com.escola.repository.EscolaRepo;
 
@@ -47,7 +48,17 @@ public class EscolaService {
                         HttpStatus.NOT_FOUND,"Escola não encontrada"
                    )
                 );
+    }
+    
+    public List<Curso> getCursosEscolaById(int codigo) {
+        Optional<List<Curso>> op = repository.getCursosEscolaById(codigo);
+         return op.orElseThrow( () -> 
+                   new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,"Escola sem cursos!"
+                   )
+                );
 	}
+
 	public Escola save(Escola escola) {
 		return repository.save(escola);
 	}

@@ -52,8 +52,10 @@ public class CursoService {
         
     }
 
-	public void removerById(int id) {
-         repository.delete(getCursoById(id)); 
+	public void removerById(int id) { 
+         Escola escola = escolaService.getEscolaByCodigo(id);
+         escola.deleteCurso(getCursoById(id));
+         repository.delete(getCursoById(id));
 	}
 
 	public Curso update(Curso curso) {

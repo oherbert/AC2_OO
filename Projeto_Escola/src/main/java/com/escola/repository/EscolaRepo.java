@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
+import com.escola.model.Curso;
 import com.escola.model.Escola;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ public class EscolaRepo {
         escolas.add(new Escola(nextCod(),"Senai","Bairro Brasil",4000L,"1962"));
         escolas.add(new Escola(nextCod(),"Fatec","Av. Getulio Vargas",8000L,"2007"));
         escolas.add(new Escola(nextCod(),"Facens","Dom Gabriel",16000L,"1971"));
+
     }
 
 
@@ -44,7 +46,7 @@ public class EscolaRepo {
     }
 
 	public void remove(Escola escola) {
-        escolas.remove(escola);
+        if(escola.getCursos().isEmpty()) escolas.remove(escola);
 	}
 
 	public Escola update(Escola escola) {
@@ -58,6 +60,17 @@ public class EscolaRepo {
 
         return aux;
     }
+
+    //Retorna os cursos por Id
+    public Optional<List<Curso>> getCursosEscolaById(int codigo) {
+        for (Escola aux : escolas) {
+            if (aux.getCodigo() == codigo) {
+                return Optional.of(aux.getCursos());
+            }
+        }
+        return Optional.empty();
+    }
+
     
     private Integer nextCod(){
         cod++;
