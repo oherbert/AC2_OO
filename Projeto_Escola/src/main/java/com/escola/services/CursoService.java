@@ -23,14 +23,22 @@ public class CursoService {
 	@Autowired
     private EscolaService escolaService;
 
-    public Curso fromDTO(CursoDTO objDTO){
+    public Curso toDTO(CursoDTO objDTO){
 		Curso curso = new Curso();
 		curso.setNome(objDTO.getNome());
 		curso.setDuracao(objDTO.getDuracao());
 		curso.setAnoCriacao(objDTO.getAnoCriacao());
 		curso.setMaxAluno(objDTO.getMaxAluno());
-		curso.setEscola(objDTO.getEscola());
         return curso;
+    }
+
+    public List<CursoDTO> toListDTO (List<Curso> cursos){
+        List<CursoDTO> dtoList = new ArrayList<>();
+
+        for(Curso curso: cursos){
+            dtoList.add(toDTO(curso));
+        }
+        return dtoList;
     }
 
 	public List<Curso> getCursos() {
@@ -53,9 +61,10 @@ public class CursoService {
     }
 
 	public void removerById(int id) { 
-         Escola escola = escolaService.getEscolaByCodigo(id);
-         escola.deleteCurso(getCursoById(id));
-         repository.delete(getCursoById(id));
+         
+        Curso curso = getCursoById(id);
+         escolaService.removeCurso(curso);
+         repository.delete(curso);
 	}
 
 	public Curso update(Curso curso) {
@@ -74,14 +83,5 @@ public class CursoService {
         return dto;
     }
 
-
-	public List<CursoDTO> toListDTO(List<Curso> cursos) {
-		ArrayList<CursoDTO> listDTO = new ArrayList<>();
-
-        for(Curso c: cursos){
-            listDTO.add(toDTO(c));
-        }
-        return listDTO;
-	}
     
 }

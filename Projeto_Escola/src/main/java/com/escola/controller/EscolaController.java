@@ -37,12 +37,6 @@ public class EscolaController {
         return escolaService.getAllEscolas();
     }
 
-    @GetMapping("/cursos/{codigo}")
-    public ResponseEntity<List<Curso>> getCursosEscolaById(@PathVariable int codigo) {
-        List <Curso> cursos = escolaService.getCursosEscolaById(codigo);
-        return ResponseEntity.ok(cursos);
-    }
-
     @DeleteMapping("/{codigo}")
     public ResponseEntity<Void> remover(@PathVariable int codigo) {
         escolaService.removeByCodigo(codigo);

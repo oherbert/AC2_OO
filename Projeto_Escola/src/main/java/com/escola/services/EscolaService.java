@@ -61,5 +61,9 @@ public class EscolaService {
 
 	public Escola save(Escola escola) {
 		return repository.save(escola);
-	}
+    }
+    
+    public void removeCurso(Curso curso){
+        EscolaRepo.removeCurso(curso);
+    }
 }

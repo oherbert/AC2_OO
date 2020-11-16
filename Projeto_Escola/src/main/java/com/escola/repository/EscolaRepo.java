@@ -78,4 +78,10 @@ public class EscolaRepo {
     }
 
 
+	public static void removeCurso(Curso curso) {
+        Escola escola = curso.getEscola();
+        escola.deleteCurso(curso);
+	}
+
+
 }
